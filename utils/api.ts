@@ -1,6 +1,7 @@
 import { supabase } from './supabaseClient';
 import { User } from '../types/User';
 
+
 export const fetchUsers = async (): Promise<User[]> => {
   const { data, error } = await supabase
     .from<'dev_users', User>('dev_users') // テーブル名と型を2つ指定
