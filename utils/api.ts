@@ -5,8 +5,8 @@ import { User } from '../types/User';
 export const fetchUsers = async (): Promise<User[]> => {
   const { data, error } = await supabase
     .from<'dev_users', User>('dev_users') // テーブル名と型を2つ指定
-    .select('*');
-
+    .select('*')
+    .eq('deleted', false);
   if (error) {
     throw error;
   }
@@ -58,6 +58,17 @@ export const updateUser = async (id: number, user: Partial<User>): Promise<User>
 
   return data as User;
 };
+
+// 論理的削除のための関数を追加
+export const deleteUpdateUser = async (id: number): Promise<void> => {
+  const { error } = await supabase
+    .from("dev_users")
+    .update({ deleted: true })
+    .eq('id', id);
+  if (error) {
+    throw error;
+  }
+}
 
 export const deleteUser = async (id: number): Promise<void> => {
   const { error } = await supabase
