@@ -9,7 +9,7 @@ import { Typography, Box } from '@mui/material';
 // TODO: 新規登録ページを実装し、RegisterFormコンポーネントを使用する
 const RegisterPage: React.FC = () => {
   return (
-
+  //  ここにユーザー一覧へのルーターを追加する
   );
 }
 
