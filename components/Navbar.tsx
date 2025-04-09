@@ -18,6 +18,9 @@ const Navbar: React.FC = () => {
         <Button color="inherit" component={Link} href="/register">
           新規登録画面
         </Button>
+        <Button color="inherit" component={Link} href="/users/[id]/edit">
+          編集画面
+        </Button>
       </Toolbar>
     </AppBar>
   );

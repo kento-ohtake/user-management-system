@@ -2,6 +2,7 @@
 
 "use client"; // クライアントコンポーネントとしてマーク
 
+import EditUserForm from "@/components/EditUserForm";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
@@ -12,6 +13,10 @@ const EditUserPage: React.FC = () => {
       <Typography variant="h4" gutterBottom>
         ユーザー編集
       </Typography>
+      <EditUserForm
+        userId={1} // TODO: URLパラメータから取得したユーザーIDを渡す
+        disabled={false}
+      />
     </Box>
   );
 };
