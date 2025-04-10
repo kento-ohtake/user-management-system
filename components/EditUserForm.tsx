@@ -75,31 +75,56 @@ const EditUserForm: React.FC<EditUserFormProps> = ({ userId, disabled }) => {
       >
         <TextField
           label="名前"
-          {...register("name", { required: "名前は必須です" })}
+          {...register("name", {
+            required: "名前の入力は必須です",
+            maxLength: {
+              value: 20,
+              message: "名前は20文字以内で入力してください",
+            },
+          })}
           variant="outlined"
           fullWidth
           margin="normal"
           error={!!errors.name}
+          helperText={errors.name?.message}
           disabled={disabled}
         />
 
         <TextField
           label="メールアドレス"
-          {...register("email", { required: "メールアドレスは必須です" })}
+          {...register("email", {
+            required: "メールアドレスの入力は必須です",
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: "無効なメールアドレスです",
+            },
+          })}
           variant="outlined"
           fullWidth
           margin="normal"
           error={!!errors.email}
+          helperText={errors.email?.message}
           disabled={disabled}
         />
 
         <TextField
           label="ロール"
-          {...register("role", { required: "ロールは必須です" })}
+          {...register("role", {
+            required: "ロールの入力は必須です",
+            pattern: {
+              value: /^[A-Za-z]+$/,
+              message: "ローマ字（英字）のみで入力してください",
+            },
+            maxLength: {
+              value: 10,
+              message: "ロールは10文字以内で入力してください",
+            },
+          })}
           variant="outlined"
           fullWidth
           margin="normal"
           error={!!errors.role}
+          helperText={errors.role?.message}
           disabled={disabled}
         />
 

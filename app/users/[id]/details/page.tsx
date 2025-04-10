@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { User } from "@/types/User";
 
 const UserDetailsPage = () => {
-  const [user, setUser] = useState<User | null>(null); //users 
+  const [user, setUser] = useState<User | null>(null); //詳細は単数とする
   const { id } = useParams();
 
   useEffect(() => {

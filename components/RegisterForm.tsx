@@ -2,7 +2,6 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import { createUser } from "../utils/api";
-// import { useRouter } from "next/navigation";
 
 interface RegisterFormInputs {
   name: string;
@@ -21,7 +20,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
   onError,
   disabled,
 }) => {
-  // const router = useRouter(); // useRouter フックを使用
 
   const {
     register,
@@ -35,7 +33,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
       await createUser(data);
       reset();
       onSuccess?.();
-      // router.push("/users"); // 登録成功後にユーザー一覧画面に遷移
     } catch (error) {
       onError?.(error);
     }
@@ -54,31 +51,56 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
       >
         <TextField
           label="名前"
-          {...register("name", { required: "名前は必須です" })}
+          {...register("name", {
+            required: "名前の入力は必須です",
+            maxLength: {
+              value: 20,
+              message: "名前は20文字以内で入力してください",
+            },
+          })}
           variant="outlined"
           fullWidth
           margin="normal"
           error={!!errors.name}
+          helperText={errors.name?.message}
           disabled={disabled}
         />
 
         <TextField
           label="メールアドレス"
-          {...register("email", { required: "メールアドレスは必須です" })}
+          {...register("email", {
+            required: "メールアドレスの入力は必須です",
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: "無効なメールアドレスです",
+            },
+          })}
           variant="outlined"
           fullWidth
           margin="normal"
           error={!!errors.email}
+          helperText={errors.email?.message}
           disabled={disabled}
         />
 
         <TextField
           label="ロール"
-          {...register("role", { required: "ロールは必須です" })}
+          {...register("role", {
+            required: "ロールの入力は必須です",
+            pattern: {
+              value: /^[A-Za-z]+$/,
+              message: "ローマ字（英字）のみで入力してください",
+            },
+            maxLength: {
+              value: 10,
+              message: "ロールは10文字以内で入力してください",
+            },
+          })}
           variant="outlined"
           fullWidth
           margin="normal"
           error={!!errors.role}
+          helperText={errors.role?.message}
           disabled={disabled}
         />
 
