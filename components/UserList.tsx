@@ -1,4 +1,5 @@
 //UserList.tsx
+import { useState } from "react";
 import { User } from "../types/User";
 import UserCard from "./UserCard";
 
@@ -7,10 +8,16 @@ interface UserListProps {
 }
 
 const UserList: React.FC<UserListProps> = ({ users }) => {
+  const [userList, setUserList] = useState<User[]>(users);
+
+const handleDelete = (deletedUserId: number) => {
+  setUserList(users.filter((user) => user.id !== deletedUserId));
+};
+
   return (
     <>
-      {users.map((user) => (
-        <UserCard key={user.id} user={user} />
+      {userList.map((user) => (
+        <UserCard key={user.id} user={user} onDelete={handleDelete} />
       ))}
     </>
   );
