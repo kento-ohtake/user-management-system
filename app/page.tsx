@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
-import RegisterForm from "@/components/RegisterForm";
 
 const HomePage: React.FC = () => {
   return (

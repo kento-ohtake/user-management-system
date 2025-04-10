@@ -3,10 +3,14 @@ import { Box, Typography } from "@mui/material";
 import { User } from "../types/User";
 
 interface UserDetailsProps {
-  user: User;
+  user: User | null;
 }
 
 const UserDetails: React.FC<UserDetailsProps> = ({ user }) => {
+ if (!user) {
+   return <Typography>ユーザー情報を読み込み中...</Typography>;
+ }
+  
   return (
     <>
       <Box>
