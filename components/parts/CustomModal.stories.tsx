@@ -15,17 +15,17 @@ const meta: Meta<typeof CustomModal> = {
 
 export default meta;
 
-// TODO: ストーリーの定義
+// ストーリーの定義
 type Story = StoryObj<typeof CustomModal>
 
-// TODO: デフォルトストーリーの作成
+// デフォルトストーリーの作成
 export const Default: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
 
     return (
       <Box>
-        {/* // TODO: クリックでモーダル開閉させる */}
+        {/* クリックでモーダル開閉させる */}
         <CustomButton variantType="primary" onClick={() => setOpen(true)}>
           モーダルを開く
         </CustomButton>
