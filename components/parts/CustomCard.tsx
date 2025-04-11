@@ -1,5 +1,4 @@
 // components/parts/CustomCard.tsx
-
 import React from "react";
 import { Card, CardContent, Typography, CardActions } from "@mui/material";
 
@@ -22,7 +21,9 @@ const CustomCard: React.FC<CustomCardProps> = ({
         <Typography variant="h5" component="div">
           {title}
         </Typography>
-        <Typography variant="body2">{description}</Typography>
+        <Typography variant="body2" sx={{ whiteSpace: "pre-line" }}>
+          {description}
+        </Typography>
       </CardContent>
       {actions && <CardActions>{actions}</CardActions>}
     </Card>
