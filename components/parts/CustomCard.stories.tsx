@@ -9,6 +9,7 @@ import CustomButton from "./CustomButton";
 const meta: Meta<typeof CustomCard> = {
   title: "Components/Parts/CustomCard",
   component: CustomCard,
+  tags: ["autodocs"],
 };
 
 export default meta;
