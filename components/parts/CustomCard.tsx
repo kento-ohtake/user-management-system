@@ -6,16 +6,18 @@ import { Card, CardContent, Typography, CardActions } from "@mui/material";
 interface CustomCardProps {
   title: string;
   description: string;
-  actions?: React.ReactNode; //調べる　
+  actions?: React.ReactNode; //調べる
+  sx?: object;
 }
 
 const CustomCard: React.FC<CustomCardProps> = ({
   title,
   description,
   actions,
+  sx,
 }) => {
   return (
-    <Card sx={{ minWidth: 275, mb: 2 }}>
+    <Card sx={{ minWidth: 275, mb: 2, ...sx }}>
       <CardContent>
         {/* TODO: [titel]と[description]を表示 */}
         <Typography variant="h5" component="div">

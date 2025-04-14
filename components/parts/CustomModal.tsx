@@ -1,6 +1,6 @@
 // components/parts/CustomModal.tsx
 import React from "react";
-import { Modal, Box, Typography, Button } from "@mui/material";
+import { Modal, Box, Typography, Button, Slide } from "@mui/material";
 
 interface CustomModalProps {
   open: boolean;
@@ -8,6 +8,7 @@ interface CustomModalProps {
   content: string;
   onClose: () => void;
   onConfirm?: () => void;
+  transition?: "slide";
 }
 
 const style = {
@@ -23,25 +24,54 @@ const style = {
 };
 
 // TODO: propの設定
-const CustomModal: React.FC<CustomModalProps> = ({open, title, content, onClose, onConfirm}) => {
+const CustomModal: React.FC<CustomModalProps> = ({
+  open,
+  title,
+  content,
+  onClose,
+  onConfirm,
+  transition,
+}) => {
   return (
     <Modal open={open} onClose={onClose}>
-      <Box sx={style}>
-        <Typography variant="h6" component="h2" gutterBottom>
-          {title}
-        </Typography>
-        <Typography sx={{ mt: 2 }}>{content}</Typography>
-        <Box sx={{ mt: 4, display: "flex", justifyContent: "flex-end" }}>
-          <Button onClick={onClose} sx={{ mr: 2 }}>
-            キャンセル
-          </Button>
-          {onConfirm && (
-            <Button variant="contained" color="primary" onClick={onConfirm}>
-              確認
+      {transition === "slide" ? (
+        <Slide in={open}>
+          <Box sx={style}>
+            <Typography variant="h6" component="h2" gutterBottom>
+              {title}
+            </Typography>
+            <Typography sx={{ mt: 2 }}>{content}</Typography>
+            <Box sx={{ mt: 4, display: "flex", justifyContent: "flex-end" }}>
+              <Button onClick={onClose} sx={{ mr: 2 }}>
+                キャンセル
+              </Button>
+              {onConfirm && (
+                <Button variant="contained" color="primary" onClick={onConfirm}>
+                  確認
+                </Button>
+              )}
+            </Box>
+          </Box>
+        </Slide>
+      ) : (
+        // transitionがない場合は通常のモーダルを表示
+        <Box sx={style}>
+          <Typography variant="h6" component="h2" gutterBottom>
+            {title}
+          </Typography>
+          <Typography sx={{ mt: 2 }}>{content}</Typography>
+          <Box sx={{ mt: 4, display: "flex", justifyContent: "flex-end" }}>
+            <Button onClick={onClose} sx={{ mr: 2 }}>
+              キャンセル
             </Button>
-          )}
+            {onConfirm && (
+              <Button variant="contained" color="primary" onClick={onConfirm}>
+                確認
+              </Button>
+            )}
+          </Box>
         </Box>
-      </Box>
+      )}
     </Modal>
   );
 };

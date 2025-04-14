@@ -1,6 +1,6 @@
 // components/parts/CustomModal.stories.tsx
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import CustomModal from "./CustomModal";
 import CustomButton from "./CustomButton";
@@ -47,3 +47,66 @@ export const Default: Story = {
     );
   },
 };
+
+//自動で閉じるモーダル
+export const AutoCloseModal: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    // open が true になったときに 3 秒後に自動で閉じる
+    useEffect(() => {
+      if (open) {
+        const timer = setTimeout(() => {
+          setOpen(false);
+        }, 3000);
+
+        return () => clearTimeout(timer); // クリーンアップ
+      }
+    }, [open]);
+
+    return (
+      <Box>
+        <CustomButton variantType="primary" onClick={() => setOpen(true)}>
+          自動で閉じるモーダルを開く
+        </CustomButton>
+        <CustomModal
+          open={open}
+          title="⏱️ 自動クローズモーダル"
+          content="3秒後に自動的に閉じます。"
+          onClose={() => setOpen(false)}
+          onConfirm={() => {
+            alert("確認されました！");
+          }}
+        />
+      </Box>
+    );
+  },
+};
+
+// 上からスライドして表示するモーダル
+export const SlideDownModal: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <Box>
+        <CustomButton variantType="primary" onClick={() => setOpen(true)}>
+          スライドモーダルを開く
+        </CustomButton>
+        <CustomModal
+          open={open}
+          title="スライドモーダル"
+          content="上からスライド表示されるモーダルです"
+          onClose={() => setOpen(false)}
+          onConfirm={() => {
+            alert("確認されました！");
+            setOpen(false);
+          }}
+          transition="slide" // ← スライドを
+        />
+      </Box>
+    );
+  },
+};
+
+
